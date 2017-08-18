@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link th:href="@{/static/mui-master/css/mui.min.css}" rel="stylesheet" />
+    <script th:src="@{/static/mui-master/js/jquery-1.11.2.min.js}"></script>
+    <script th:src="@{/static/mui-master/js/mui.js}"></script>
+    <link th:href="@{/static/mui-master/css/common.css}" rel="stylesheet" />
+    <script th:src="@{/static/mui-master/js/common.js}"></script>
+    <title></title>
+</head>
+<body>
+
+
+
+<script>
+    document.title = "帐户信息";
+</script>
+<header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">帐户信息</h1>
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+</header>
+<div class="mui-content" style="padding-bottom:0;">
+    <div class="mui-content-padded">
+        <ul class="mui-table-view mui-table-view-chevron">
+            <li style="background: #2ad; padding:5px 0px"><strong style="color:#FFF;margin-left: 15px;">上级信息：</strong></li>
+            <li class=" mui-table-view-cell">
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <td><p>上级名称：<strong>周立中</strong></p> </td>
+                        </tr>
+                        <tr>
+                            <td><p>手 机 号：<strong>13826910983</strong></p> </td>
+                        </tr>
+                        <tr>
+                            <td><p>授权编号：<strong>3481237824</strong></p> </td>
+                        </tr>
+                        <tr>
+                            <td><p>授权等级：<strong>品牌经理</strong></p> </td>
+                        </tr>
+                        <tr>
+                            <td><p>所属团队：<strong>黑马团队</strong></p> </td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+        </ul>
+
+
+        <ul class="mui-table-view mui-table-view-chevron">
+            <li style="background: #2ad; padding:5px 0px"><strong style="color:#FFF;margin-left: 15px;">本人信息：</strong></li>
+            <li class=" mui-table-view-cell">
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <td><p>代理名称：<strong>何喜红</strong></p> </td>
+                        </tr>
+                        <tr>
+                            <td><p>手机号　：<strong>15989900331</strong></p> </td>
+                        </tr>
+                        <tr>
+                            <td><p>授权编号：<strong>073977247</strong></p> </td>
+                        </tr>
+                        <tr>
+                            <td><p>授权等级：<strong>市级代理</strong></p> </td>
+                        </tr>
+                        <tr>
+                            <td><p>所属团队：<strong>黑马团队</strong></p> </td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
+</body>
+</html>

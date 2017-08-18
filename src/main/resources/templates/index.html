@@ -6,11 +6,11 @@
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <link th:href="@{/static/css/mui.min.css}" rel="stylesheet"/>
-    <link th:href="@{/static/css/common.css}" rel="stylesheet"/>
-    <script th:src="@{/static/js/jquery-1.11.2.min.js}"></script>
-    <script th:src="@{/static/js/mui.js}"></script>
-    <script th:src="@{/static/js/common.js}"></script>
+    <link th:href="@{/static/mui-master/css/mui.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/mui-master/css/common.css}" rel="stylesheet"/>
+    <script th:src="@{/static/mui-master/js/jquery-1.11.2.min.js}"></script>
+    <script th:src="@{/static/mui-master/js/mui.js}"></script>
+    <script th:src="@{/static/mui-master/js/common.js}"></script>
     <title></title>
 </head>
 <body>
@@ -44,6 +44,15 @@
         </ul>
     </div>
     <ul class="mui-table-view mui-table-view-chevron">
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="/system/index/account">
+                <img class="mui-media-object mui-pull-left" src="/static/image/icon-agent.png"/>
+                <div class="mui-media-body">
+                    帐户信息
+                    <p class='mui-ellipsis'>查看自己和上级信息</p>
+                </div>
+            </a>
+        </li>
         <li class="mui-table-view-cell mui-media">
             <a class="mui-navigate-right" href="javascript:void(0);"
                onclick="window.location.href = '../DistributorManagement/Mandate'">
