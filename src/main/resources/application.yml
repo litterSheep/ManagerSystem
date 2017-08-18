@@ -1,0 +1,32 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_manager?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+    username: root
+    password: 1234566
+
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+        ddl-auto: update
+        naming:
+        strategy: org.hibernate.cfg.DefaultComponentSafeNamingStrategy
+    properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL5Dialect
+
+  mvc:
+    # 默认值为/**
+    static-path-pattern: /static/**
+  resources:
+    # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+    static-locations: classpath:/static/
+
+thymeleaf:
+        cache: false
+        mode: LEGACYHTML5
+        prefix: classpath:/templates # 一定要配置,不然打成jar时无法解析html
+

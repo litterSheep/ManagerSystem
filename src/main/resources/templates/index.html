@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link th:href="@{/static/css/mui.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/css/common.css}" rel="stylesheet"/>
+    <script th:src="@{/static/js/jquery-1.11.2.min.js}"></script>
+    <script th:src="@{/static/js/mui.js}"></script>
+    <script th:src="@{/static/js/common.js}"></script>
+    <title></title>
+</head>
+<body>
+
+<style>
+    p {
+        font-size: 10px;
+    }
+</style>
+<script>
+    document.title = '代理商后台';
+</script>
+
+<script>
+    mui.toast('登陆成功', {duration: 'short', type: 'div'})
+</script>
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">代理商后台</h1>
+</header>
+<div class="mui-content">
+    <div class="mui-card" style="margin-bottom: 5px;margin-top: 6px;">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell mui-media" style="padding: 5px 8px;">
+                <div style="float:left;width:60%;"><img src="/static/image/indexlogo.png" style="width:100%;"/></div>
+                <div style="float:left;width:39%;"><strong
+                        style="position: absolute;top: 32%;margin-left: 8px;" th:text="${user.username}">admin</strong>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ul class="mui-table-view mui-table-view-chevron">
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:void(0);"
+               onclick="window.location.href = '../DistributorManagement/Mandate'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/fxssc.png"/>
+                <div class="mui-media-body">
+                    代理商授权
+                    <p class='mui-ellipsis'>查询或生成下级代理商注册链接</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class='mui-navigate-right' href="javascript:;"
+               onclick="window.location.href = '../SubordinateManage/Index'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/fxsgl.png"/>
+                <div class="mui-media-body">
+                    代理商管理
+                    <p class='mui-ellipsis'>管理正在申请的，或已有下级代理商</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;" onclick="window.location.href = '../Order/List'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/dd01.png"/>
+                <div class="mui-media-body">
+                    我的订单
+                    <p class='mui-ellipsis'>我的订单详细信息</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;" onclick="window.location.href = '../LowerOrder/Index'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/dd02.png"/>
+                <div class="mui-media-body">
+                    下级订单
+                    <p class='mui-ellipsis'>下级订单详细信息</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;" onclick="window.location.href = '../LowerOrder2/Index'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/dd02.png"/>
+                <div class="mui-media-body">
+                    下级订单（无条码）
+                    <p class='mui-ellipsis'>下级订单详细信息（无条码）</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;" onclick="window.location.href = '../LowerOrder2/List'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/wtj.png"/>
+                <div class="mui-media-body">
+                    无条码出入库统计
+                    <p class='mui-ellipsis'>无条码出入库统计</p>
+                </div>
+            </a>
+        </li>
+        <!--自己申请，不用上级提交申请-->
+        <li class="mui-table-view-cell mui-media">
+
+            <a class="mui-navigate-right" href="javascript:;" onclick="TZ(0)">
+                <img class="mui-media-object mui-pull-left" src="/static/image/tjsj.png"/>
+                <div class="mui-media-body">
+                    调级申请
+                    <p class='mui-ellipsis'>向总部提交调级申请</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;"
+               onclick="window.location.href = '../PSIOutInStorage/Index'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/ckgl.png"/>
+                <div class="mui-media-body">
+                    出库管理
+                    <p class='mui-ellipsis'>扫描条码发货给下级代理商</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;"
+               onclick="window.location.href = '../OutInStorageList/Index'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/ckcx.png"/>
+                <div class="mui-media-body">
+                    出库查询
+                    <p class='mui-ellipsis'>出库信息查询</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;"
+               onclick="window.location.href = '../SaleOutStorage/Index'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/lsck.png"/>
+                <div class="mui-media-body">
+                    零售出库
+                    <p class='mui-ellipsis'>代理商进行零售出库操作</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;" onclick="window.location.href = '../ReturnGoods/Index'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/jxth.png"/>
+                <div class="mui-media-body">
+                    次品退货
+                    <p class='mui-ellipsis'>代理商次品退货管理</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;"
+               onclick="window.location.href = '../SaleReturnGoods/Index'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/lsth.png"/>
+                <div class="mui-media-body">
+                    零售退货
+                    <p class='mui-ellipsis'>零售退货管理</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;" onclick="window.location.href = '../CusStore/Index'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/kctj.png"/>
+                <div class="mui-media-body">
+                    库存统计
+                    <p class='mui-ellipsis'>代理商库存统计</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;"
+               onclick="window.location.href = '../RptOutStorage/StatisticalReport'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/tjbb.png"/>
+                <div class="mui-media-body">
+                    统计报表
+                    <p class='mui-ellipsis'>代理商统计报表</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;" onclick="window.location.href = '../ProdOriginLog/Index'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/chcx.png"/>
+                <div class="mui-media-body">
+                    窜货查询
+                    <p class='mui-ellipsis'>根据物流条码获取产品流向信息</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="http://m.kuaidi100.com/index.jsp?from=openv">
+                <img class="mui-media-object mui-pull-left" src="/static/image/kdcx.png"/>
+                <div class="mui-media-body">
+                    快递查询
+                    <p class='mui-ellipsis'>快递100查询</p>
+                </div>
+            </a>
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="javascript:;"
+               onclick="window.location.href = '../DistributorManagement/UpdatePwd'">
+                <img class="mui-media-object mui-pull-left" src="/static/image/mm.png"/>
+                <div class="mui-media-body">
+                    修改密码
+                    <p class='mui-ellipsis'>修改登录密码</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+<script>
+    mui.init({
+        swipeBack: false //启用右滑关闭功能
+    });
+    //备份mui.back，mui.back已将窗口关闭逻辑封装的比较完善（预加载及父子窗口），因此最好复用mui.back
+    var old_back = mui.back;
+    mui.back = function () {
+        var btn = ["确定", "取消"];
+        mui.confirm('确认关闭当前窗口？', '', btn, function (e) {
+            if (e.index == 0) {
+                //执行mui封装好的窗口关闭逻辑；
+                window.location.href = "/APP/DistributorManagement/Login";
+            }
+        });
+    }
+    function TZ(ExamineState) {
+        var btnArray = ['否', '是'];
+        if (ExamineState == 1) {
+            btnArray = ['提示'];
+            mui.confirm('总部审核中...', '', btnArray, function (e) {
+                if (e.index == 1) {
+
+                } else {
+
+                }
+            });
+        } else if (ExamineState == 3) {
+            btnArray = ['提示'];
+            mui.confirm('', '', btnArray, function (e) {
+                window.location.href = "/APP/CusReApply/MyUpgrade";
+            });
+        } else {
+            window.location.href = "/APP/CusReApply/MyUpgrade";
+        }
+    }
+</script>
+
+
+</body>
+</html>
