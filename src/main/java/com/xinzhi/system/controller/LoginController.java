@@ -57,15 +57,15 @@ public class LoginController {
     }
 
     @PostMapping(value = "/doLogin")
-    public String login(@Valid UserInfo user, BindingResult bindingResult, RedirectAttributes redirectAttributes, boolean rememberMe
+    public ModelAndView login(@Valid UserInfo user, BindingResult bindingResult, RedirectAttributes redirectAttributes, boolean rememberMe
             , HttpServletRequest request, Map<String, Object> map) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:login";
-        }
+        ModelAndView model = new ModelAndView();
+        if (bindingResult.hasErrors())
+            model.setViewName("redirect:login");
         if (user == null || StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())) {
             logger.info("用户名或密码为空! ");
             redirectAttributes.addFlashAttribute("msg", "用户名或密码为空!");
-            return "redirect:login";
+            model.setViewName("redirect:login");
         }
         String userName = user.getUsername();
         //对密码进行加密后验证
@@ -108,13 +108,14 @@ public class LoginController {
             Session session = currentUser.getSession();
             UserInfo tUser = userInfoService.findByUsername(userName);
             session.setAttribute("user", tUser);
-            map.put("user", tUser);
-            return "/index";
+
+            model.addObject("user",tUser);
+            model.setViewName("/index");
         } else {
             token.clear();
-            return "redirect:login";
+            model.setViewName("redirect:login");
         }
-
+        return model;
 
 //        // 登录失败从request中获取shiro处理的异常信息。
 //        // shiroLoginFailure:就是shiro异常类的全类名.
