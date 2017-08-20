@@ -26,7 +26,7 @@
 
     <span th:text="${msg}" class="label label-danger"/>
 
-    <form th:object="${user}" action="/system/doLogin" method="post" class="mui-input-group">
+    <form th:object="${user}" action="/system/index" method="post" class="mui-input-group">
         <div class="mui-input-row">
             <label>账号</label>
             <input id='account' type="text" class="mui-input-clear mui-input" maxlength="16"

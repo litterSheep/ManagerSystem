@@ -56,16 +56,19 @@ public class LoginController {
         return model;
     }
 
-    @PostMapping(value = "/doLogin")
-    public String login(@Valid UserInfo user, BindingResult bindingResult, RedirectAttributes redirectAttributes, boolean rememberMe
+    @PostMapping(value = "/index")
+    public ModelAndView doLogin(@Valid UserInfo user, BindingResult bindingResult, RedirectAttributes redirectAttributes, boolean rememberMe
             , HttpServletRequest request, Map<String, Object> map) {
+        ModelAndView model = new ModelAndView();
         if (bindingResult.hasErrors()) {
-            return "redirect:login";
+            model.setViewName("redirect:login");
+            return model;
         }
         if (user == null || StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())) {
             logger.info("用户名或密码为空! ");
             redirectAttributes.addFlashAttribute("msg", "用户名或密码为空!");
-            return "redirect:login";
+            model.setViewName("redirect:login");
+            return model;
         }
         String userName = user.getUsername();
         //对密码进行加密后验证
@@ -108,11 +111,13 @@ public class LoginController {
             Session session = currentUser.getSession();
             UserInfo tUser = userInfoService.findByUsername(userName);
             session.setAttribute("user", tUser);
-            map.put("user", tUser);
-            return "/index";
+            model.addObject("user", tUser);
+            model.setViewName("/index");
+            return model;
         } else {
             token.clear();
-            return "redirect:login";
+            model.setViewName("redirect:login");
+            return model;
         }
 
 
@@ -142,17 +147,4 @@ public class LoginController {
 //        return "redirect:login";
     }
 
-    @GetMapping(value = "/logout")
-    public String logout(RedirectAttributes redirectAttributes) {
-        //使用权限管理工具进行用户的退出，跳出登录，给出提示信息
-        SecurityUtils.getSubject().logout();
-        redirectAttributes.addFlashAttribute("msg", "您已安全退出");
-        return "redirect:login";
-    }
-
-    @RequestMapping("/403")
-    public String unauthorizedRole() {
-        logger.info("------没有权限-------");
-        return "errorPermission";
-    }
 }
