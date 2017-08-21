@@ -123,7 +123,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/system/login");
         // 登录成功后要跳转的连接
         shiroFilterFactoryBean.setSuccessUrl("/system/index");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/system/403");
 
         loadShiroFilterChain(shiroFilterFactoryBean, userInfoService);
         return shiroFilterFactoryBean;
@@ -144,7 +144,7 @@ public class ShiroConfig {
         //filterChainDefinitionMap.put("/user/edit/**", "authc,perms[user:edit]");
         // 配置不会被拦截的链接 顺序判断
         //filterChainDefinitionMap.put("/static/**", "anon");
-        filterChainDefinitionMap.put("/system", "authc");
+        //filterChainDefinitionMap.put("/system/**", "authc");
         filterChainDefinitionMap.put("/system/login", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
