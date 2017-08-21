@@ -10,4 +10,5 @@ public interface UserInfoService {
     UserInfo findByUsername(String username);
 
     void addUser(UserInfo userInfo);
+
 }

@@ -1,6 +1,7 @@
 package com.xinzhi.system.utils;
 
 import com.xinzhi.system.entity.UserInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -31,6 +32,14 @@ public class PasswordEncrypt {
 
         userInfo.setPassword(newPassword);
         return userInfo;
+    }
+
+    public static boolean isPasswordEquals(UserInfo originInfo, String psw) {
+        if (StringUtils.isEmpty(psw) || originInfo == null)
+            return false;
+        String pswByEncrypt = new SimpleHash(algorithmName, psw,
+                ByteSource.Util.bytes(originInfo.getCredentialsSalt()), hashIterations).toHex();
+        return pswByEncrypt.equals(originInfo.getPassword());
     }
 
     public static void main(String[] args) {

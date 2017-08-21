@@ -3,6 +3,7 @@ package com.xinzhi.system.controller;
 import com.xinzhi.system.entity.UserInfo;
 import com.xinzhi.system.forms.ChangePswForm;
 import com.xinzhi.system.sevice.UserInfoService;
+import com.xinzhi.system.utils.PasswordEncrypt;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -56,13 +57,46 @@ public class UserController {
     @PostMapping(value = "/doChangePsw")
     public ModelAndView doChangePsw(ModelAndView modelAndView, @Valid ChangePswForm pswForm, BindingResult bindingResult) {
         Subject currentUser = SecurityUtils.getSubject();
+        String name = currentUser.getPrincipals().toString();
         logger.info("pswMap:" + pswForm.toString());
-        if (bindingResult.hasErrors()) {
-            modelAndView.addObject("msg", "出错了:" + bindingResult.getAllErrors().get(0).getDefaultMessage());
-        } else {
-            modelAndView.addObject("msg", "操作成功");
-        }
+
         modelAndView.setViewName("change_psw");
+        if (bindingResult.hasErrors()) {
+            if (pswForm != null) {
+                if (pswForm.getOldPsw().isEmpty()) {
+                    modelAndView.addObject("msg", "请输入原始密码");
+                } else if (pswForm.getNewPsw().isEmpty()) {
+                    modelAndView.addObject("msg", "请输入新密码");
+                } else {
+                    modelAndView.addObject("msg", "请再次输入新密码");
+                }
+            } else {
+                modelAndView.addObject("msg", "出错了:" + bindingResult.getAllErrors().get(0).getDefaultMessage());
+            }
+        } else {
+
+            if (pswForm.getOldPsw().equals(pswForm.getNewPsw())) {
+                modelAndView.addObject("msg", "新密码与旧密码一致");
+                return modelAndView;
+            }
+            if (!pswForm.getNewPsw().equals(pswForm.getNewPswAgain())) {
+                modelAndView.addObject("msg", "两次输入的新密码不一致");
+                return modelAndView;
+            }
+            UserInfo userInfo = userInfoService.findByUsername(name);
+            if (userInfo != null) {
+                //验证旧密码是否正确
+                if (PasswordEncrypt.isPasswordEquals(userInfo, pswForm.getOldPsw())) {
+                    userInfo.setPassword(pswForm.getNewPsw());
+                    userInfoService.addUser(userInfo);
+                    modelAndView.addObject("username", name);
+                    SecurityUtils.getSubject().logout();
+                    modelAndView.setViewName("login");
+                } else {
+                    modelAndView.addObject("msg", "原始密码错误");
+                }
+            }
+        }
         return modelAndView;
     }
 }
