@@ -1,18 +1,20 @@
 package com.xinzhi.system.controller;
 
 import com.xinzhi.system.entity.UserInfo;
+import com.xinzhi.system.forms.ChangePswForm;
 import com.xinzhi.system.sevice.UserInfoService;
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.Map;
+import javax.validation.Valid;
 
 /**
  * Created by ly on 2017/7/20 10:11.
@@ -47,17 +49,18 @@ public class UserController {
 
     @GetMapping(value = "/changePsw")
     public String introPageChangePsw() {
+        Subject currentUser = SecurityUtils.getSubject();
         return "change_psw";
     }
 
     @PostMapping(value = "/doChangePsw")
-    public ModelAndView doChangePsw(@RequestBody Map<String, String> pswMap, BindingResult bindingResult) {
-
-        logger.info("pswMap:" + pswMap.toString());
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView doChangePsw(ModelAndView modelAndView, @Valid ChangePswForm pswForm, BindingResult bindingResult) {
+        Subject currentUser = SecurityUtils.getSubject();
+        logger.info("pswMap:" + pswForm.toString());
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("redirect:change_psw");
-            return modelAndView;
+            modelAndView.addObject("msg", "出错了:" + bindingResult.getAllErrors().get(0).getDefaultMessage());
+        } else {
+            modelAndView.addObject("msg", "操作成功");
         }
         modelAndView.setViewName("change_psw");
         return modelAndView;

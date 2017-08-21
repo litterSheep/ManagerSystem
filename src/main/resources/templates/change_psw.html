@@ -21,22 +21,28 @@
 </header>
 
 <div class="mui-content">
-    <form th:object="${pswMap}" action="/system/user/doChangePsw" method="post" class="mui-input-group">
+
+    <div th:text="${msg}">这里是信息提示.</div>
+
+    <form th:object="${changePswForm}" action="/system/user/doChangePsw" method="post" class="mui-input-group">
 
         <div class="mui-content-padded">
             <div class="mui-input-row mui-password">
                 <input type="password" id="UserPwd" maxlength="16" class="mui-input-password"
-                       th:name="oldPsw"
+                       name="oldPsw"
+                       th:value="${oldPsw}"
                        placeholder="请输入原始密码"/>
             </div>
             <div class="mui-input-row mui-password">
                 <input type="password" id="NewUserPwd" maxlength="16" class="mui-input-password"
-                       th:name="newPsw"
+                       name="newPsw"
+                       th:value="${newPsw}"
                        placeholder="请输入新密码"/>
             </div>
             <div class="mui-input-row mui-password">
                 <input type="password" id="NextNewUserPwd" maxlength="16" class="mui-input-password"
-                       th:name="newPswAgain"
+                       name="newPswAgain"
+                       th:value="${newPswAgain}"
                        placeholder="请再次输入新密码"/>
             </div>
 

@@ -39,7 +39,7 @@ public class LoginController {
         ModelAndView model = new ModelAndView();
         UserInfo userInfo = null;
         //获取当前登录用户，这样登录成功点返回时不会进入到登录界面
-        Subject currentUser = SecurityUtils.getSubject();
+        Subject currentUser = null;
         try {
             userInfo = userInfoService.findByUsername(currentUser.getPrincipals().toString());
         } catch (Exception e) {

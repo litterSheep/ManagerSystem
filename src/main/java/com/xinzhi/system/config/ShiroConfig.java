@@ -137,15 +137,17 @@ public class ShiroConfig {
         /////////////////////// 下面这些规则配置最好配置到配置文件中 ///////////////////////
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //配置记住我或认证通过可以访问的地址
-        filterChainDefinitionMap.put("/", "user");
+        //filterChainDefinitionMap.put("/", "user");
         // authc：该过滤器下的页面必须验证后才能访问，它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter
         // anon：它对应的过滤器里面是空的,什么都没做，可以理解为不拦截
         // 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取
         //filterChainDefinitionMap.put("/user/edit/**", "authc,perms[user:edit]");
         // 配置不会被拦截的链接 顺序判断
         //filterChainDefinitionMap.put("/static/**", "anon");
-        //filterChainDefinitionMap.put("/system/**", "authc");
+        //filterChainDefinitionMap.put("/system/**", "authc");  为什么不能**来过滤呢  wtf
         filterChainDefinitionMap.put("/system/login", "authc");
+        filterChainDefinitionMap.put("/system", "authc");
+        filterChainDefinitionMap.put("/system/user/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     }
