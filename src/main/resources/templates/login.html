@@ -27,6 +27,15 @@
     <span th:text="${msg}" class="label label-danger"/>
 
     <form th:object="${user}" action="/system/index" method="post" class="mui-input-group">
+
+        <div th:if="${#fields.hasErrors('*')}">
+            <ul>
+                <span style="color:#ff0000;">//th:each遍历错误并通过ul列表显示出来</span>
+                <li th:each="err:${#fields.errors('*')}" th:text="${err}">输入有误</li>
+            </ul>
+
+        </div>
+
         <div class="mui-input-row">
             <label>账号</label>
             <input id='account' type="text" class="mui-input-clear mui-input" maxlength="16"
@@ -73,6 +82,17 @@
     </div>
 </div>
 
+<script>
+
+    function test() {
+        var btn = ["确定", "取消"];
+        mui.confirm('确认关闭当前窗口？', '', btn, function (e) {
+            if (e.index == 0) {
+                //执行mui封装好的窗口关闭逻辑；
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

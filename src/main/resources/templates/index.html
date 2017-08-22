@@ -33,6 +33,9 @@
     <h1 class="mui-title">代理商后台</h1>
 </header>
 <div class="mui-content">
+
+    <button type="button" onclick="test()">Show Dialog</button>
+
     <div class="mui-card" style="margin-bottom: 5px;margin-top: 6px;">
         <ul class="mui-table-view">
             <li class="mui-table-view-cell mui-media" style="padding: 5px 8px;">
@@ -218,6 +221,17 @@
     </ul>
 </div>
 <script>
+
+    function test() {
+        var btn = ["确定", "取消"];
+        mui.confirm('确认关闭当前窗口？', '', btn, function (e) {
+            if (e.index == 0) {
+                //执行mui封装好的窗口关闭逻辑；
+                window.location.href = "/APP/DistributorManagement/Login";
+            }
+        });
+    }
+
     mui.init({
         swipeBack: false //启用右滑关闭功能
     });

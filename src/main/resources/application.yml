@@ -27,6 +27,7 @@ spring:
 
 thymeleaf:
         cache: false
+        enabled: false
         mode: LEGACYHTML5
         prefix: classpath:/templates # 一定要配置,不然打成jar时无法解析html
 
